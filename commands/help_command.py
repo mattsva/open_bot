@@ -1,8 +1,10 @@
 # commands/help_command.py
+# Copyright (c) 2026 mattisva
+# Licensed under the MIT License
 from config import Meta
 
 HELP_TEXT = f"""
-**OpenBot {Meta.version} Commands**
+**open_bot {Meta.version} Commands**
 
 **1. Moderation / Server Management**
 - `!bot mute <user>` → Mute a user (requires role or timeout)
@@ -29,4 +31,11 @@ HELP_TEXT = f"""
 - `!bot serverinfo` → Show server info: creation date, channels, members
 - `!bot channelinfo <channel>` → Show channel type, category, permissions
 - `!bot roleinfo <role>` → Show role color, member count, permissions
+
+---
+
+https://github.com/mattsva/open_bot
+Copyright (c) 2026 mattisva
+Licensed under the MIT License
+
 """

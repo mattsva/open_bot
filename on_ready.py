@@ -1,3 +1,6 @@
+# on_ready.py
+# Copyright (c) 2026 mattisva
+# Licensed under the MIT License
 import discord
 from utils.logger import log
 from config import Meta

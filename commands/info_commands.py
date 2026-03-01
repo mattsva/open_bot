@@ -1,4 +1,6 @@
 # commands/info_commands.py
+# Copyright (c) 2026 mattisva
+# Licensed under the MIT License
 import discord
 from utils.logger import safe_send, log
 from commands.help_command import HELP_TEXT

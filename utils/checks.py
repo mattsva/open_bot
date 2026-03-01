@@ -1,4 +1,6 @@
-# checks.py
+# utils/checks.py
+# Copyright (c) 2026 mattisva
+# Licensed under the MIT License
 from config import Meta
 
 def is_admin(member): # Checks if the member is an admin

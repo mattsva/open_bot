@@ -1,4 +1,6 @@
 # bot.py
+# Copyright (c) 2026 mattisva
+# Licensed under the MIT License
 import discord
 from config import Meta
 from on_ready import on_ready_event

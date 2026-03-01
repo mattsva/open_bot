@@ -1,4 +1,6 @@
 # utils/logger.py
+# Copyright (c) 2026 mattisva
+# Licensed under the MIT License
 import discord
 import datetime
 from config import Meta
