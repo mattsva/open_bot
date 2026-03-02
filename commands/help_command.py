@@ -17,6 +17,10 @@ HELP_TEXT = f"""
 `!bot df <name>` → Delete category
 `!bot webapp on` → Activates the WebApp/WebInterface
 `!bot webapp off` → Deactivates the WebApp/WebInterface
+`!bot cr <role> <color>` → Create role <role> with colorcode <color>
+`!bot dr <role>` → Delete role <role>
+`!bot ar @user <role>` → Add role <role> to user
+`!bot rr @user <role>` → Remove role <role> form user
 
 ━━━━━━━━━━━━━━━━━━━━
 **Information**
