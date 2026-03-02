@@ -32,6 +32,10 @@ HELP_TEXT = f"""
 - `!bot channelinfo <channel>` → Show channel type, category, permissions
 - `!bot roleinfo <role>` → Show role color, member count, permissions
 
+**4. Fun Commands (Everyone)**
+- `!bot rint <number1>-<number2>` → random number between number1 and number2
+- `!bot rchoose <text1>-<text2>` → random choosen text that is text1 or text2
+
 ---
 
 https://github.com/mattsva/open_bot

@@ -11,7 +11,7 @@ load_dotenv()
 
 class Meta:
     # DO NOT CHANGE:
-    version = "v0.0.0.-e2.u4"
+    version = "v0.0.0.-e2.u5"
     GUILD_ID = os.getenv("GUILD_ID")
     TOKEN = os.getenv("BOT_TOKEN")
 

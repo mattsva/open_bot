@@ -4,7 +4,7 @@
 import discord
 from config import Meta
 from on_ready import on_ready_event
-from commands import info_commands, admin_commands
+from commands import info_commands, admin_commands, fun_commands
 from utils.logger import safe_send, log
 
 intents = discord.Intents.default()
@@ -58,6 +58,18 @@ async def on_message(message: discord.Message):
         Meta.print_console and print(f"[ERROR info_commands] {e}")
         try:
             if Meta.output: await safe_send(message.channel, f"Error executing info command: {e}")
+        except: pass
+
+    # Fun commands next:
+    try:
+        handled = await fun_commands.handle_info(message, command_text)
+        if handled:
+            Meta.print_console and print(f"[DEBUG] FUN command handled: {command_text}")
+            return
+    except Exception as e:
+        Meta.print_console and print(f"[ERROR fun_commands] {e}")
+        try:
+            if Meta.output: await safe_send(message.channel, f"Error executing fun command: {e}")
         except: pass
 
 

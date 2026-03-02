@@ -2,6 +2,8 @@
 
 **open_bot** is an open-source Discord bot written in Python, built primarily using the `discord.py` library.  
 It is licensed under the MIT License (see `LICENSE`).
+It is currently running on `Python 3.14.3`.
+Version `v0.0.0.-e2.u4` (development build). The `v0.0.0` prefix reflects the base version; the `.-e2.u4` suffix is for internal development/testing.
 
 ---
 
