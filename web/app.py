@@ -1,3 +1,6 @@
+# web/app.py
+# Copyright (c) 2026 mattisva
+# Licensed under the MIT License
 from flask import Flask, render_template, request, redirect, url_for
 from config import Meta
 import threading

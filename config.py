@@ -11,17 +11,18 @@ load_dotenv()
 
 class Meta:
     # DO NOT CHANGE
-    version = "v0.0.0.-e6.u1" # DO NOT CHANGE (unless you change it and want to update the version)
+    version = "v0.0.0.-e7.u3" # DO NOT CHANGE (unless you change it and want to update the version)
     GUILD_ID = os.getenv("GUILD_ID") # DO NOT CHANGE
     TOKEN = os.getenv("BOT_TOKEN") # DO NOT CHANGE
     ai_messages = [] # DO NOT CHANGE
 
     ## Change thoose:
 
-    # Output
+    # Output and log
     log = True
     print_console = True
     output = True
+    db_log_is_active = True
 
     # Roles
     admin_role = "admin"

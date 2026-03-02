@@ -9,6 +9,7 @@ from commands import info_commands, admin_commands, fun_commands
 from utils.logger import safe_send
 from utils.ai import Ollama
 from web.app import start_web
+from db_log.main import db_add_message
 
 # intents
 intents = discord.Intents.default()
@@ -37,6 +38,9 @@ async def on_message(message: discord.Message):
 
     if Meta.print_console:
         print(f"[DEBUG] {message.author}: {message.content}")
+    
+    if Meta.db_log_is_active:
+        db_add_message(message.author, message.content)
 
     prefix = "!bot"
     if not message.content.lower().startswith(prefix):
