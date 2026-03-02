@@ -37,26 +37,19 @@ async def handle_fun(message, command_text: str) -> bool:
             await log(f"{member} used rint: {a}-{b}", guild)
             return True
 
-        # rcoose - random str between Two Strings <a>-<b>
         elif cmd.startswith("rchoose"):
             payload = command_text[7:].strip()
 
-            if "-" not in payload:
-                await safe_send(message.channel, "Usage: rchoose <a>-<b>")
+            parts = [p.strip() for p in payload.split("-") if p.strip()]
+
+            if len(parts) < 2:
+                await safe_send(message.channel, "Usage: rchoose <a>-<b>-<c>-...")
                 return True
 
-            parts = payload.split("-")
-            if len(parts) != 2:
-                await safe_send(message.channel, "Usage: rchoose <a>-<b>")
-                return True
-
-            a = parts[0].strip()
-            b = parts[1].strip()
-
-            result = random.choice([a, b])
+            result = random.choice(parts)
             await safe_send(message.channel, result)
 
-            await log(f"{member} used rchoose: {a}-{b}", guild)
+            await log(f"{member} used rchoose: {parts}", guild)
             return True
 
         # ping - pong

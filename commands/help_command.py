@@ -9,31 +9,31 @@ HELP_TEXT = f"""
 ━━━━━━━━━━━━━━━━━━━━
 **Moderation / Admin**
 ━━━━━━━━━━━━━━━━━━━━
-!bot echo <text> → Bot repeats the text (admin only)
-!bot version → Show bot version
-!bot cc <name> [category] → Create text channel
-!bot dc <name> → Delete channel
-!bot cf <name> → Create category
-!bot df <name> → Delete category
-!bot webapp on → Activates the WebApp/WebInterface
-!bot webapp off → Deactivates the WebApp/WebInterface
+`!bot echo <text>` → Bot repeats the text (admin only)
+`!bot version →` Show bot version
+`!bot cc <name> [category]` → Create text channel
+`!bot dc <name>` → Delete channel
+`!bot cf <name>` → Create category
+`!bot df <name>` → Delete category
+`!bot webapp on` → Activates the WebApp/WebInterface
+`!bot webapp off` → Deactivates the WebApp/WebInterface
 
 ━━━━━━━━━━━━━━━━━━━━
 **Information**
 ━━━━━━━━━━━━━━━━━━━━
-!bot help → Show this help message
-!bot userinfo @user → Show user information
-!bot serverinfo → Show server information
-!bot channelinfo <name> → Show channel information
-!bot roleinfo <name> → Show role information
+`!bot help` → Show this help message
+`!bot userinfo @user` → Show user information
+`!bot serverinfo` → Show server information
+`!bot channelinfo <name>` → Show channel information
+`!bot roleinfo <name>` → Show role information
 
 ━━━━━━━━━━━━━━━━━━━━
 **Fun**
 ━━━━━━━━━━━━━━━━━━━━
-!bot rint <a>-<b> → Random integer between a and b
-!bot rchoose <a>-<b> → Randomly choose a or b
-!bot ping → Replies pong
-!bot ai <message> → Chat with AI
+`!bot rint <a>-<b>` → Random integer between a and b
+`rchoose <a>-<b>-<c>-...` → Randomly choose a, b, c or ...
+`!bot ping` → Replies pong
+`!bot ai <message>` → Chat with AI
 
 ━━━━━━━━━━━━━━━━━━━━
 https://github.com/mattsva/open_bot
