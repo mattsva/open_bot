@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Meta Config</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f2f2f2; padding: 20px; }
+        h1 { color: #333; }
+        form { background: #fff; padding: 20px; border-radius: 5px; max-width: 400px; }
+        label { display: block; margin-top: 10px; }
+        input[type=text] { width: 100%; padding: 5px; }
+        input[type=submit] { margin-top: 15px; padding: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Meta Configuration</h1>
+    <form method="post">
+        <label>
+            <input type="checkbox" name="log" {% if meta.log %}checked{% endif %}>
+            Log
+        </label>
+        <label>
+            <input type="checkbox" name="print_console" {% if meta.print_console %}checked{% endif %}>
+            Print Console
+        </label>
+        <label>
+            <input type="checkbox" name="output" {% if meta.output %}checked{% endif %}>
+            Output
+        </label>
+        <label>
+            Admin Role:
+            <input type="text" name="admin_role" value="{{ meta.admin_role }}">
+        </label>
+        <label>
+            AI Model:
+            <input type="text" name="ai_model" value="{{ meta.ai_model }}">
+        </label>
+        <input type="submit" value="Save Changes">
+    </form>
+</body>
+</html>

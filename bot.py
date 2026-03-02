@@ -1,15 +1,21 @@
 # bot.py
 # Copyright (c) 2026 mattisva
 # Licensed under the MIT License
+import threading
 import discord
 from config import Meta
 from on_ready import on_ready_event
 from commands import info_commands, admin_commands, fun_commands
 from utils.logger import safe_send
 from utils.ai import Ollama
+from web.app import start_web
 
+# start WebApp when enabled
+if Meta.web_active:
+    web_thread = threading.Thread(target=start_web, daemon=True)
+    web_thread.start()
 
-# Intents
+# intents
 intents = discord.Intents.default()
 intents.guilds = True
 intents.members = True
@@ -18,7 +24,7 @@ intents.message_content = True
 
 client = discord.Client(intents=intents)
 
-# Events
+# events
 @client.event
 async def on_ready():
     if Meta.print_console:
@@ -32,7 +38,6 @@ async def on_ready():
 
 @client.event
 async def on_message(message: discord.Message):
-
     if message.author.bot:
         return
 
@@ -40,12 +45,10 @@ async def on_message(message: discord.Message):
         print(f"[DEBUG] {message.author}: {message.content}")
 
     prefix = "!bot"
-
     if not message.content.lower().startswith(prefix):
         return
 
     command_text = message.content[len(prefix):].strip()
-
     if not command_text:
         return
 
