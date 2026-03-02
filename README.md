@@ -4,7 +4,7 @@
 It is licensed under the MIT License (see `LICENSE`).
 It is currently running on `Python 3.14.3`.
 Its using `ollama` for AI.
-Version `v0.0.0.-e5.u5` (development build). The `v0.0.0` prefix reflects the base version; the `.-e2.u4` suffix is for internal development/testing.
+Version `v0.0.0.-e5.u20` (development build). The `v0.0.0` prefix reflects the base version; the `.-e2.u4` suffix is for internal development/testing.
 
 ---
 
