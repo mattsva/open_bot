@@ -10,15 +10,19 @@ from utils.checks import is_admin
 async def handle_admin(message, command_text: str) -> bool:
     guild = message.guild
     member = message.author
-    cmd = command_text.lower().strip()
+
+    cmd_raw = command_text.strip()
+    cmd = cmd_raw.lower()
 
     if not is_admin(member):
-        return False  # Not handled → allow other modules to check
+        return False
 
     try:
+        parts = cmd_raw.split()
+
         # echo
         if cmd.startswith("echo"):
-            await safe_send(message.channel, command_text[5:].strip())
+            await safe_send(message.channel, cmd_raw[5:].strip())
             await log(f"{member} used echo", guild)
             return True
 
@@ -30,7 +34,6 @@ async def handle_admin(message, command_text: str) -> bool:
 
         # cc - create channel
         elif cmd.startswith("cc"):
-            parts = command_text.split()
             if len(parts) < 2:
                 await safe_send(message.channel, "Please specify a channel name.")
                 return True
@@ -44,14 +47,12 @@ async def handle_admin(message, command_text: str) -> bool:
                 category=category,
                 reason=f"Created by {member}"
             )
-
             await safe_send(message.channel, f"Channel created: {new_channel.mention}")
             await log(f"{member} created channel {parts[1]}", guild)
             return True
 
         # dc - delete channel
         elif cmd.startswith("dc"):
-            parts = command_text.split()
             if len(parts) < 2:
                 await safe_send(message.channel, "Please specify a channel name.")
                 return True
@@ -66,9 +67,8 @@ async def handle_admin(message, command_text: str) -> bool:
             await log(f"{member} deleted channel {parts[1]}", guild)
             return True
 
-        # cf - create category (aka folder)
+        # cf - create category
         elif cmd.startswith("cf"):
-            parts = command_text.split()
             if len(parts) < 2:
                 await safe_send(message.channel, "Please specify a category name.")
                 return True
@@ -77,14 +77,12 @@ async def handle_admin(message, command_text: str) -> bool:
                 name=parts[1],
                 reason=f"Created by {member}"
             )
-
             await safe_send(message.channel, f"Category created: {new_cat.name}")
             await log(f"{member} created category {parts[1]}", guild)
             return True
 
-        # df - celete category (aka folder)
+        # df - delete category
         elif cmd.startswith("df"):
-            parts = command_text.split()
             if len(parts) < 2:
                 await safe_send(message.channel, "Please specify a category name.")
                 return True
@@ -98,20 +96,105 @@ async def handle_admin(message, command_text: str) -> bool:
             await safe_send(message.channel, f"Category {parts[1]} deleted.")
             await log(f"{member} deleted category {parts[1]}", guild)
             return True
-        
-        # webapp active/deactive
+
+        # webapp on/off
         elif cmd.startswith("webapp"):
-            if command_text[6:].strip() == "on":
+            action = cmd_raw[6:].strip()
+            if action == "on":
                 Meta.web_active = True
-                await safe_send(message.channel, "WebApp is now activatet")
+                await safe_send(message.channel, "WebApp is now activated")
                 await log(f"{member} used webapp on", guild)
-            elif command_text[6:].strip() == "off":
+            elif action == "off":
                 Meta.web_active = False
-                await safe_send(message.channel, "WebApp is now deactivatet")
+                await safe_send(message.channel, "WebApp is now deactivated")
                 await log(f"{member} used webapp off", guild)
             else:
-                await safe_send(message.channel, f"WebApp can not do: {command_text[6:]}")
-                await log(f"{member} tried webapp {command_text[6:]}", guild)
+                await safe_send(message.channel, f"WebApp cannot do: {action}")
+                await log(f"{member} tried webapp {action}", guild)
+            return True
+
+        # cr - create role with optional color
+        elif cmd.startswith("cr"):
+            if len(parts) < 2:
+                await safe_send(message.channel, "Please specify a role name.")
+                return True
+
+            role_name = parts[1]
+            role_color = discord.Color.default()
+
+            if len(parts) >= 3:
+                hex_color = parts[2].replace("#", "")
+                try:
+                    role_color = discord.Color(int(hex_color, 16))
+                except ValueError:
+                    await safe_send(message.channel, "Invalid color format. Use hex like #ff0000")
+                    return True
+
+            existing = discord.utils.get(guild.roles, name=role_name)
+            if existing:
+                await safe_send(message.channel, "Role already exists.")
+                return True
+
+            new_role = await guild.create_role(
+                name=role_name,
+                color=role_color,
+                reason=f"Created by {member}"
+            )
+            await safe_send(message.channel, f"Role created: {new_role.mention}")
+            await log(f"{member} created role {role_name} with color {role_color}", guild)
+            return True
+
+        # dr - delete role
+        elif cmd.startswith("dr"):
+            if len(parts) < 2:
+                await safe_send(message.channel, "Please specify a role name.")
+                return True
+
+            role_name = parts[1]
+            role = discord.utils.get(guild.roles, name=role_name)
+            if not role:
+                await safe_send(message.channel, "Role not found.")
+                return True
+
+            await role.delete(reason=f"Deleted by {member}")
+            await safe_send(message.channel, f"Role {role_name} deleted.")
+            await log(f"{member} deleted role {role_name}", guild)
+            return True
+
+        # ar - add role to member
+        elif cmd.startswith("ar"):
+            if len(parts) < 3 or not message.mentions:
+                await safe_send(message.channel, "Usage: ar @user RoleName")
+                return True
+
+            target_member = message.mentions[0]
+            role_name = parts[2]
+            role = discord.utils.get(guild.roles, name=role_name)
+            if not role:
+                await safe_send(message.channel, "Role not found.")
+                return True
+
+            await target_member.add_roles(role, reason=f"Added by {member}")
+            await safe_send(message.channel, f"Role {role_name} added to {target_member.mention}.")
+            await log(f"{member} added role {role_name} to {target_member}", guild)
+            return True
+
+        # rr - remove role from member
+        elif cmd.startswith("rr"):
+            if len(parts) < 3 or not message.mentions:
+                await safe_send(message.channel, "Usage: rr @user RoleName")
+                return True
+
+            target_member = message.mentions[0]
+            role_name = parts[2]
+            role = discord.utils.get(guild.roles, name=role_name)
+            if not role:
+                await safe_send(message.channel, "Role not found.")
+                return True
+
+            await target_member.remove_roles(role, reason=f"Removed by {member}")
+            await safe_send(message.channel, f"Role {role_name} removed from {target_member.mention}.")
+            await log(f"{member} removed role {role_name} from {target_member}", guild)
             return True
 
         return False
