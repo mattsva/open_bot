@@ -18,10 +18,16 @@ async def handle_info(message, command_text: str):
             b = int(command_text[(command_text.find("-"))+1:].strip())
             await safe_send(message.channel, random.choice([a, b]))
         
+        # rchoose
         elif command_text.lower().startswith("rchoose"):
             a = str(command_text[8:(command_text.find("-"))].strip())
             b = str(command_text[(command_text.find("-"))+1:].strip())
             await safe_send(message.channel, random.choice([a, b]))
+        
+        # ping - pong
+        elif command_text.lower().startswith("ping"):
+            await safe_send(message.channel, "pong")
+        
 
 
         # log usage
