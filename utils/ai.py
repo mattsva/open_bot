@@ -50,3 +50,8 @@ class Ollama:
         })
 
         return assistant_content
+
+# TODO:
+# - Add model change
+# - Add more AI systems
+# - - Add GPT4ALL integration

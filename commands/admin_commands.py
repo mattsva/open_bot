@@ -111,3 +111,8 @@ async def handle_admin(message, command_text: str) -> bool:
         print(f"Error in admin_commands: {e}")
         await safe_send(message.channel, "An unexpected error occurred.")
         return True
+
+# TODO:
+# - Add role commands
+# - Add premission system
+# - - Add premisson commands

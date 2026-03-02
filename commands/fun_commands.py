@@ -80,6 +80,10 @@ async def handle_fun(message, command_text: str) -> bool:
             await log(f"{member} used ai command", guild)
             return True
 
+            # TODO:
+            # - Add verification
+            # - Add ratelimit
+
         return False  # no command matched
 
     except Exception as e:

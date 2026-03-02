@@ -33,3 +33,6 @@ class Meta:
     web_active = True # True to activate web server
     web_debug = False # Flask debug mode
     only_localhost = True # True = 127.0.0.1 only, False = accessible in WLAN
+
+# TODO:
+# - Add more customisable options
