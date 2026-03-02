@@ -3,7 +3,8 @@
 **open_bot** is an open-source Discord bot written in Python, built primarily using the `discord.py` library.  
 It is licensed under the MIT License (see `LICENSE`).
 It is currently running on `Python 3.14.3`.
-Version `v0.0.0.-e3.u0` (development build). The `v0.0.0` prefix reflects the base version; the `.-e2.u4` suffix is for internal development/testing.
+Its using `ollama` for AI.
+Version `v0.0.0.-e4.u0` (development build). The `v0.0.0` prefix reflects the base version; the `.-e2.u4` suffix is for internal development/testing.
 
 ---
 
@@ -14,6 +15,8 @@ Version `v0.0.0.-e3.u0` (development build). The `v0.0.0` prefix reflects the ba
 - Admin and info commands
 - Event handling via `on_ready`
 - Easy to extend with new commands or events
+
+- AI integration with `ollama`
 
 ---
 
@@ -46,13 +49,19 @@ source .venv/bin/activate  # Linux/macOS
 .venv\Scripts\activate     # Windows
 ```
 
-### 3. Install dependencies
+### 3. Install ollama (if its not installed yet)
+
+```bash
+curl -fsSL https://ollama.com/install.sh | sh
+```
+
+### 4. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Configure environment variables
+### 5. Configure environment variables
 
 Create a `.env` file in the project root (like the `.env.example` file):
 
