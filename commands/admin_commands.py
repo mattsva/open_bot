@@ -98,6 +98,21 @@ async def handle_admin(message, command_text: str) -> bool:
             await safe_send(message.channel, f"Category {parts[1]} deleted.")
             await log(f"{member} deleted category {parts[1]}", guild)
             return True
+        
+        # webapp active/deactive
+        elif cmd.startswith("webapp"):
+            if command_text[6:].strip() == "on":
+                Meta.web_active = True
+                await safe_send(message.channel, "WebApp is now activatet")
+                await log(f"{member} used webapp on", guild)
+            elif command_text[6:].strip() == "off":
+                Meta.web_active = False
+                await safe_send(message.channel, "WebApp is now deactivatet")
+                await log(f"{member} used webapp off", guild)
+            else:
+                await safe_send(message.channel, f"WebApp can not do: {command_text[6:]}")
+                await log(f"{member} tried webapp {command_text[6:]}", guild)
+            return True
 
         return False
 

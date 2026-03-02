@@ -15,6 +15,8 @@ HELP_TEXT = f"""
 !bot dc <name> → Delete channel
 !bot cf <name> → Create category
 !bot df <name> → Delete category
+!bot webapp on → Activates the WebApp/WebInterface
+!bot webapp off → Deactivates the WebApp/WebInterface
 
 ━━━━━━━━━━━━━━━━━━━━
 **Information**

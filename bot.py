@@ -10,11 +10,6 @@ from utils.logger import safe_send
 from utils.ai import Ollama
 from web.app import start_web
 
-# start WebApp when enabled
-if Meta.web_active:
-    web_thread = threading.Thread(target=start_web, daemon=True)
-    web_thread.start()
-
 # intents
 intents = discord.Intents.default()
 intents.guilds = True
@@ -34,7 +29,6 @@ async def on_ready():
         await on_ready_event(client)
     except Exception as e:
         print(f"[ERROR on_ready] {e}")
-
 
 @client.event
 async def on_message(message: discord.Message):
@@ -88,12 +82,16 @@ async def on_message(message: discord.Message):
 if __name__ == "__main__":
     if Meta.print_console:
         print("[STARTUP] Starting bot...")
-
     try:
         Ollama.startup()
     except Exception as e:
         print(f"[CRITICAL] Ollama failed to start: {e}")
-
+    try:
+        if Meta.web_active: # start WebApp when enabled 
+            web_thread = threading.Thread(target=start_web, daemon=True)
+            web_thread.start()
+    except Exception as e:
+        print(f"[CRITICAL] Web failed to start: {e}")
     try:
         client.run(Meta.TOKEN)
     except Exception as e:

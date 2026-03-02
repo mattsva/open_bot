@@ -13,8 +13,9 @@
     </style>
 </head>
 <body>
-    <h1>Meta Configuration</h1>
-    <form method="post">
+    <class id="Meta_Configuration">
+        <h1>Meta Configuration</h1>
+        <form method="post">
         <label>
             <input type="checkbox" name="log" {% if meta.log %}checked{% endif %}>
             Log
@@ -28,6 +29,18 @@
             Output
         </label>
         <label>
+            <input type="checkbox" name="web_active" {% if meta.web_active %}checked{% endif %}>
+            WebApp
+        </label>
+                <label>
+            <input type="checkbox" name="web_debug" {% if meta.web_debug %}checked{% endif %}>
+            Web Debuging
+        </label>
+                <label>
+            <input type="checkbox" name="only_localhost" {% if meta.only_localhost %}checked{% endif %}>
+            Only Localhost
+        </label>
+        <label>
             Admin Role:
             <input type="text" name="admin_role" value="{{ meta.admin_role }}">
         </label>
@@ -37,5 +50,6 @@
         </label>
         <input type="submit" value="Save Changes">
     </form>
+    </class>
 </body>
 </html>

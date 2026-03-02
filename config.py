@@ -30,7 +30,7 @@ class Meta:
     ai_model = "gpt-oss:latest"
 
     # WebApp
-    web_active = True # True to activate web server
+    web_active = True # Activate web server
     web_debug = False # Flask debug mode
     only_localhost = True # True = 127.0.0.1 only, False = accessible in WLAN
 
