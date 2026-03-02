@@ -5,8 +5,11 @@ import discord
 from config import Meta
 from on_ready import on_ready_event
 from commands import info_commands, admin_commands, fun_commands
-from utils.logger import safe_send, log
+from utils.logger import safe_send
+from utils.ai import Ollama
 
+
+# Intents
 intents = discord.Intents.default()
 intents.guilds = True
 intents.members = True
@@ -15,67 +18,80 @@ intents.message_content = True
 
 client = discord.Client(intents=intents)
 
-
+# Events
 @client.event
 async def on_ready():
-    Meta.print_console and print(f"[STARTUP] Bot logged in as {client.user}")
+    if Meta.print_console:
+        print(f"[STARTUP] Logged in as {client.user}")
+
     try:
         await on_ready_event(client)
     except Exception as e:
-        Meta.print_console and print(f"[ERROR on_ready] {e}")
+        print(f"[ERROR on_ready] {e}")
 
 
 @client.event
 async def on_message(message: discord.Message):
-    Meta.print_console and print(f"[DEBUG] MESSAGE from {message.author}: {message.content}")
 
-    if message.author == client.user:
-        return
-    if not message.content.lower().startswith("!bot"):
+    if message.author.bot:
         return
 
-    command_text = message.content[5:].strip()
+    if Meta.print_console:
+        print(f"[DEBUG] {message.author}: {message.content}")
 
-    # Admin commands first:
+    prefix = "!bot"
+
+    if not message.content.lower().startswith(prefix):
+        return
+
+    command_text = message.content[len(prefix):].strip()
+
+    if not command_text:
+        return
+
+    # Admin
     try:
         handled = await admin_commands.handle_admin(message, command_text)
         if handled:
-            Meta.print_console and print(f"[DEBUG] ADMIN command handled: {command_text}")
             return
     except Exception as e:
-        Meta.print_console and print(f"[ERROR admin_commands] {e}")
-        try: 
-            if Meta.output: await safe_send(message.channel, f"Error executing admin command: {e}")
-        except: pass
+        print(f"[ERROR admin_commands] {e}")
+        if Meta.output:
+            await safe_send(message.channel, "Error executing admin command.")
+        return
 
-    # Info commands next:
+    # Info
     try:
         handled = await info_commands.handle_info(message, command_text)
         if handled:
-            Meta.print_console and print(f"[DEBUG] INFO command handled: {command_text}")
             return
     except Exception as e:
-        Meta.print_console and print(f"[ERROR info_commands] {e}")
-        try:
-            if Meta.output: await safe_send(message.channel, f"Error executing info command: {e}")
-        except: pass
+        print(f"[ERROR info_commands] {e}")
+        if Meta.output:
+            await safe_send(message.channel, "Error executing info command.")
+        return
 
-    # Fun commands next:
+    # Fun
     try:
-        handled = await fun_commands.handle_info(message, command_text)
+        handled = await fun_commands.handle_fun(message, command_text)
         if handled:
-            Meta.print_console and print(f"[DEBUG] FUN command handled: {command_text}")
             return
     except Exception as e:
-        Meta.print_console and print(f"[ERROR fun_commands] {e}")
-        try:
-            if Meta.output: await safe_send(message.channel, f"Error executing fun command: {e}")
-        except: pass
-
+        print(f"[ERROR fun_commands] {e}")
+        if Meta.output:
+            await safe_send(message.channel, "Error executing fun command.")
+        return
 
 if __name__ == "__main__":
-    Meta.print_console and print("[STARTUP] Starting bot...")
+    if Meta.print_console:
+        print("[STARTUP] Starting bot...")
+
+    try:
+        Ollama.startup()
+    except Exception as e:
+        print(f"[CRITICAL] Ollama failed to start: {e}")
+
     try:
         client.run(Meta.TOKEN)
     except Exception as e:
-        Meta.print_console and print(f"[CRITICAL] Bot failed to start: {e}")
+        print(f"[CRITICAL] Bot failed to start: {e}")

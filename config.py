@@ -11,12 +11,14 @@ load_dotenv()
 
 class Meta:
     # DO NOT CHANGE:
-    version = "v0.0.0.-e3.u1"
+    version = "v0.0.0.-e3.u34"
     GUILD_ID = os.getenv("GUILD_ID")
     TOKEN = os.getenv("BOT_TOKEN")
+    ai_messages = []
 
     # CHANGE:
     log = True
     print_console = True
     output = True
     admin_role = "admin" # This is admin role on your server
+    ai_model = "gpt-oss:latest" # This is your ai model

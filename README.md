@@ -21,8 +21,9 @@ Version `v0.0.0.-e3.u0` (development build). The `v0.0.0` prefix reflects the ba
 
 | Library         | Version  | License |                   Purpose                    |
 |-----------------|----------|---------|----------------------------------------------|
-| `discord.py`    | >=2.3.0  |   MIT   | Core Discord bot framework                   |
+|  `discord.py`   | >=2.3.0  |   MIT   |          Core Discord bot framework          |
 | `python-dotenv` | >=1.0.0  |   MIT   | Load environment variables from `.env` files |
+|     `llama`     | >=0.6.1  |   MIT   |      Gives the AI functions using `ai`       |
 
 > These dependencies are **not included in the repository**. They must be installed separately.
 

@@ -1,38 +1,88 @@
-# commands/info_commands.py
+# commands/fun_commands.py
 # Copyright (c) 2026 mattisva
 # Licensed under the MIT License
-import discord
-from utils.logger import safe_send, log
-from commands.help_command import HELP_TEXT
-from config import Meta
+import asyncio
 import random
+from utils.logger import safe_send, log
+from config import Meta
+from utils.ai import Ollama
 
-async def handle_info(message, command_text: str):
+
+async def handle_fun(message, command_text: str) -> bool:
     guild = message.guild
     member = message.author
 
     try:
-        # rint
-        if command_text.lower().startswith("rint"):
-            a = int(command_text[5:(command_text.find("-"))].strip())
-            b = int(command_text[(command_text.find("-"))+1:].strip())
-            await safe_send(message.channel, random.choice([a, b]))
-        
-        # rchoose
-        elif command_text.lower().startswith("rchoose"):
-            a = str(command_text[8:(command_text.find("-"))].strip())
-            b = str(command_text[(command_text.find("-"))+1:].strip())
-            await safe_send(message.channel, random.choice([a, b]))
-        
+        cmd = command_text.lower()
+
+        # rint - random int in range <a>-<b>
+        if cmd.startswith("rint"):
+            payload = command_text[4:].strip()
+
+            if "-" not in payload:
+                await safe_send(message.channel, "Usage: rint <a>-<b>")
+                return True
+
+            parts = payload.split("-")
+            if len(parts) != 2:
+                await safe_send(message.channel, "Usage: rint <a>-<b>")
+                return True
+
+            a = int(parts[0].strip())
+            b = int(parts[1].strip())
+
+            result = random.randint(a, b)
+            await safe_send(message.channel, result)
+
+            await log(f"{member} used rint: {a}-{b}", guild)
+            return True
+
+        # rcoose - random str between Two Strings <a>-<b>
+        elif cmd.startswith("rchoose"):
+            payload = command_text[7:].strip()
+
+            if "-" not in payload:
+                await safe_send(message.channel, "Usage: rchoose <a>-<b>")
+                return True
+
+            parts = payload.split("-")
+            if len(parts) != 2:
+                await safe_send(message.channel, "Usage: rchoose <a>-<b>")
+                return True
+
+            a = parts[0].strip()
+            b = parts[1].strip()
+
+            result = random.choice([a, b])
+            await safe_send(message.channel, result)
+
+            await log(f"{member} used rchoose: {a}-{b}", guild)
+            return True
+
         # ping - pong
-        elif command_text.lower().startswith("ping"):
+        elif cmd.startswith("ping"):
             await safe_send(message.channel, "pong")
-        
+            await log(f"{member} used ping", guild)
+            return True
 
+        # AI Chat
+        elif cmd.startswith("ai"):
+            content = command_text[2:].strip()
 
-        # log usage
-        await log(f"{member} used info command: {command_text}", guild)
+            if not content:
+                await safe_send(message.channel, "Usage: ai <message>")
+                return True
+
+            # Run blocking AI call in thread
+            response = await asyncio.to_thread(Ollama.ai, content)
+
+            await safe_send(message.channel, response)
+            await log(f"{member} used ai command", guild)
+            return True
+
+        return False  # no command matched
 
     except Exception as e:
-        print(f"Error in info_commands: {e}")
+        print(f"Error in fun_commands: {e}")
         await safe_send(message.channel, "An error occurred while processing your request.")
+        return True
