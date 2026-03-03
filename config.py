@@ -1,6 +1,6 @@
 # config.py
 # Copyright (c) 2026 mattisva
-# Licensed under the MIT License
+# Licensed under the MIT License - see the LICENSE file in the project root for details.
 import os
 from dotenv import load_dotenv
 

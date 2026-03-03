@@ -1,6 +1,6 @@
 # utils/checks.py
 # Copyright (c) 2026 mattisva
-# Licensed under the MIT License
+# Licensed under the MIT License - see the LICENSE file in the project root for details.
 from config import Meta
 
 def is_admin(member): # Checks if the member is an admin

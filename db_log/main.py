@@ -1,6 +1,6 @@
 # db_log/main.py
 # Copyright (c) 2026 mattisva
-# Licensed under the MIT License
+# Licensed under the MIT License - see the LICENSE file in the project root for details.
 from db_log.init import init, get_connection
 
 # initialize database once
