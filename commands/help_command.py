@@ -21,6 +21,13 @@ HELP_TEXT = f"""
 `!bot dr <role>` → Delete role <role>
 `!bot ar @user <role>` → Add role <role> to user
 `!bot rr @user <role>` → Remove role <role> form user
+`!bot aai on` → AI fetures on
+`!bot aai off` → AI fetures on
+`!bot aai show` → show AI model
+`!bot mc <model>` → AI model change to <model>
+`!bot dblog on` → DB logging system on
+`!bot dblog off` → DB logging system off
+`!bot dblog show` → Show DB log
 
 ━━━━━━━━━━━━━━━━━━━━
 **Information**

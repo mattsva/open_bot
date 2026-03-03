@@ -60,6 +60,9 @@ async def handle_fun(message, command_text: str) -> bool:
 
         # AI Chat
         elif cmd.startswith("ai"):
+            if not Meta.ai_is_active:
+                await safe_send(message.channel, "AI fetures are turned off.")
+                return True
             content = command_text[2:].strip()
 
             if not content:

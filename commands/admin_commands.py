@@ -32,7 +32,7 @@ async def handle_admin(message, command_text: str) -> bool:
             await safe_send(message.channel, Meta.version)
             await log(f"{member} used version", guild)
             return True
-        
+        # dblog on/off/show
         elif cmd.startswith("dblog"):
             action = cmd_raw[6:].strip()
             if action == "on":
@@ -50,6 +50,30 @@ async def handle_admin(message, command_text: str) -> bool:
                 await safe_send(message.channel, f"WebApp cannot do: {action}")
                 await log(f"{member} tried dblog {action}", guild)
             return True
+
+        # aai - admin ai settings
+        elif cmd.startswith("aai"):
+            action = cmd_raw[3:].strip()
+            if action == "on":
+                Meta.ai_is_active = True
+                await safe_send(message.channel, "AI fetures are now activated")
+                await log(f"{member} used aai on", guild)
+            elif action == "off":
+                Meta.ai_is_active = False
+                await safe_send(message.channel, "AI fetures are deactivated")
+                await log(f"{member} used aai off", guild)
+            elif action == "show":
+                await safe_send(message.channel, Meta.ai_model)
+                await log(f"{member} used aai show", guild)
+            elif action.startswith("ms"):
+                Meta.ai_model = action[3:].strip()
+                await safe_send(message.channel, f"Switched AI model to `{Meta.ai_model}`.")
+                await log(f"{member} used aai modelswitch (ms) ms", guild)
+            else:
+                await safe_send(message.channel, f"AI system cannot do: {action}")
+                await log(f"{member} tried aai {action}", guild)
+            return True
+
 
         # cc - create channel
         elif cmd.startswith("cc"):

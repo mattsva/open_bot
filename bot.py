@@ -87,11 +87,12 @@ if __name__ == "__main__":
     if Meta.print_console:
         print("[STARTUP] Starting bot...")
     try:
-        Ollama.startup()
+        if Meta.ai_is_active:
+            Ollama.startup()
     except Exception as e:
         print(f"[CRITICAL] Ollama failed to start: {e}")
     try:
-        if Meta.web_active: # start WebApp when enabled 
+        if Meta.web_active: # start WebApp when enabled
             web_thread = threading.Thread(target=start_web, daemon=True)
             web_thread.start()
     except Exception as e:
