@@ -5,6 +5,7 @@ import discord
 from utils.logger import safe_send, log
 from config import Meta
 from utils.checks import is_admin
+from db_log.main import db_show_messages
 
 
 async def handle_admin(message, command_text: str) -> bool:
@@ -30,6 +31,24 @@ async def handle_admin(message, command_text: str) -> bool:
         elif cmd == "version":
             await safe_send(message.channel, Meta.version)
             await log(f"{member} used version", guild)
+            return True
+        
+        elif cmd.startswith("dblog"):
+            action = cmd_raw[6:].strip()
+            if action == "on":
+                Meta.db_log_is_active = True
+                await safe_send(message.channel, "DB log is now activated")
+                await log(f"{member} used dblog on", guild)
+            elif action == "off":
+                Meta.db_log_is_active = False
+                await safe_send(message.channel, "DB log is now deactivated")
+                await log(f"{member} used dblog off", guild)
+            elif action == "show":
+                await safe_send(message.channel, db_show_messages())
+                await log(f"{member} used dblog show", guild)
+            else:
+                await safe_send(message.channel, f"WebApp cannot do: {action}")
+                await log(f"{member} tried dblog {action}", guild)
             return True
 
         # cc - create channel
@@ -210,7 +229,7 @@ async def handle_admin(message, command_text: str) -> bool:
         await safe_send(message.channel, "An unexpected error occurred.")
         return True
 
+
 # TODO:
-# - Add role commands
 # - Add premission system
 # - - Add premisson commands

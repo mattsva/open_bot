@@ -25,10 +25,12 @@ def db_add_message(author, content):
     conn.close()
 
 def db_show_messages():
+    ret = ""
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute("SELECT author, content FROM messages") # get messages from DB
     for author, content in cursor.fetchall():
-        print(f"{author}: {content}")
+        ret += (f"{author}: {content}")
     cursor.close()
     conn.close()
+    return ret
