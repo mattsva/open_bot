@@ -1,0 +1,14 @@
+{
+  "meta": { "name": "example_command", "version": "1" },
+  "commands": [
+    {
+      "trigger": "example",
+      "admin_only": true,
+      "args": [{ "name": "text", "rest": true }],
+      "actions": [
+        { "type": "send_message", "content": "this is the text you said: {text}" },
+        { "type": "log", "message": "{user} used example with {text}" }
+      ]
+    }
+  ]
+}
