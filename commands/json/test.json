@@ -1,0 +1,95 @@
+{
+  "commands": [
+    {
+      "trigger": "jexample",
+      "admin_only": true,
+      "args": [],
+      "actions": [
+        {
+          "type": "send_message",
+          "content": "EXAMPLE TEST START"
+        },
+        {
+          "type": "send_dm",
+          "content": "DM test: starting test."
+        },
+        {
+          "type": "reply",
+          "content": "Reply test successful."
+        },
+        {
+          "type": "send_message",
+          "content": "Random Choice Test:"
+        },
+        {
+          "type": "random_choice",
+          "options": ["Option A", "Option B", "Option C"]
+        },
+        {
+          "type": "math",
+          "expression": "2 + 2 * 0"
+        },
+        {
+          "type": "loop",
+          "count": "2",
+          "actions": [
+            {
+              "type": "send_message",
+              "content": "Loop iteration running."
+            },
+            {
+              "type": "random_choice",
+              "options": ["Loop choice A", "Loop choice B"]
+            }
+          ]
+        },
+        {
+          "type": "create_channel",
+          "name": "test-channel"
+        },
+        {
+          "type": "create_role",
+          "name": "TestRole"
+        },
+        {
+          "type": "add_role",
+          "role": "TestRole"
+        },
+        {
+          "type": "set_channel_topic",
+          "topic": "This is a test channel for full system test."
+        },
+        {
+          "type": "if",
+          "condition": "is_admin",
+          "then": [
+            {
+              "type": "send_message",
+              "content": "Admin check passed."
+            }
+          ],
+          "else": [
+            {
+              "type": "send_message",
+              "content": "Admin check failed."
+            }
+          ]
+        },
+        {
+          "type": "send_embed",
+          "title": "Test Embed",
+          "description": "This is a rich embed test.",
+          "color": "0xff0000"
+        },
+        {
+          "type": "delay",
+          "seconds": 1
+        },
+        {
+          "type": "send_message",
+          "content": "EXAMPLE TEST END"
+        }
+      ]
+    }
+  ]
+}

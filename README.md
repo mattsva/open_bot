@@ -4,8 +4,8 @@
 It is licensed under the MIT License (see `LICENSE`).
 It is currently running on `Python 3.14.3`.
 Its using `ollama` for AI.
-Its using `mysql` for database.
-Version `v0.0.0.-e9.u2` (development build). The `v0.0.0` prefix reflects the base version; the `.-e2.u4` suffix is for internal development/testing.
+Its using `sqlite` for database.
+Version `v0.0.0.-e9.u134` (development build). The `v0.0.0` prefix reflects the base version; the `.-e2.u4` suffix is for internal development/testing.
 
 ---
 
