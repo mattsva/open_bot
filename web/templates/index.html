@@ -1,25 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!--
-        Copyright (c) 2026 mattisva
-        Licensed under the MIT License - see the LICENSE file in the project root for details.
-    -->
-    <meta charset="UTF-8">
-    <title>Meta Config</title>
-    <style>
-        body { font-family: Arial, sans-serif; background: #f2f2f2; padding: 20px; }
-        h1 { color: #333; }
-        form { background: #fff; padding: 20px; border-radius: 5px; max-width: 400px; }
-        label { display: block; margin-top: 10px; }
-        input[type=text] { width: 100%; padding: 5px; }
-        input[type=submit] { margin-top: 15px; padding: 10px; }
-    </style>
-</head>
-<body>
-    <class id="Meta_Configuration">
-        <h1>Meta Configuration</h1>
-        <form method="post">
+{% extends "base.html" %}
+
+{% block title %}Meta Configuration{% endblock %}
+
+{% block content %}
+<div class="Meta_Configuration">
+    <h1>Meta Configuration</h1>
+    <form method="post">
         <label>
             <input type="checkbox" name="log" {% if meta.log %}checked{% endif %}>
             Log
@@ -36,11 +22,11 @@
             <input type="checkbox" name="web_active" {% if meta.web_active %}checked{% endif %}>
             WebApp
         </label>
-                <label>
+        <label>
             <input type="checkbox" name="web_debug" {% if meta.web_debug %}checked{% endif %}>
-            Web Debuging
+            Web Debugging
         </label>
-                <label>
+        <label>
             <input type="checkbox" name="only_localhost" {% if meta.only_localhost %}checked{% endif %}>
             Only Localhost
         </label>
@@ -54,6 +40,5 @@
         </label>
         <input type="submit" value="Save Changes">
     </form>
-    </class>
-</body>
-</html>
+</div>
+{% endblock %}

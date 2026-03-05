@@ -3,18 +3,18 @@
 # Licensed under the MIT License - see the LICENSE file in the project root for details.
 from db_log.init import init, get_connection
 
-# initialize database once
+# init db once
 if not init():
     raise RuntimeError("Failed to initialize database.")
 
-def db_add_message(author, content):
 
+def db_add_message(author, content):
     conn = get_connection()
     cursor = conn.cursor()
 
-    # convert author to string
+    # convert author to str
     if not isinstance(author, str):
-        author = str(author)  # or use author.name for just the username
+        author = str(author)
 
     cursor.execute(
         "INSERT INTO messages (author, content) VALUES (?, ?)",
@@ -24,13 +24,14 @@ def db_add_message(author, content):
     cursor.close()
     conn.close()
 
+
 def db_show_messages():
-    ret = ""
+    messages = []
     conn = get_connection()
     cursor = conn.cursor()
-    cursor.execute("SELECT author, content FROM messages") # get messages from DB
+    cursor.execute("SELECT author, content FROM messages")  # get messages from DB
     for author, content in cursor.fetchall():
-        ret += (f"{author}: {content}")
+        messages.append({"author": author, "content": content})
     cursor.close()
     conn.close()
-    return ret
+    return messages

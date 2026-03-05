@@ -2,24 +2,132 @@
     Copyright (c) 2026 mattisva
     Licensed under the MIT License - see the LICENSE file in the project root for details.
 */
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f2f2f2;
+    margin: 0;
+    padding: 0 20px 20px 20px;
+}
+
+header nav {
+    padding: 10px 0;
+    font-weight: bold;
+}
+
+header nav a {
+    text-decoration: none;
+    color: #333;
+    margin-right: 15px;
+}
+
+header nav a:hover {
+    text-decoration: underline;
+}
+
+main {
+    margin-top: 10px;
+}
+
+footer {
+    text-align: center;
+    padding: 10px 0;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.Meta_Configuration {
+    max-width: 500px;
+    margin: auto;
+    background-color: #fff;
     padding: 20px;
+    border-radius: 5px;
 }
 
 .Meta_Configuration h1 {
     color: #333;
+    margin-bottom: 15px;
 }
 
-.Meta_Configuration ul {
+.Meta_Configuration form label {
+    display: block;
+    margin-top: 10px;
+}
+
+.Meta_Configuration input[type="text"] {
+    width: 100%;
+    padding: 5px;
+    margin-top: 3px;
+    box-sizing: border-box;
+}
+
+.Meta_Configuration input[type="submit"] {
+    margin-top: 15px;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.Logs_Container {
+    max-width: 800px;
+    margin: auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.Logs_Container h1 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.Logs_Container ul {
     list-style: none;
     padding: 0;
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
-.Meta_Configuration li {
+.Logs_Container li {
+    padding: 8px 10px;
+    border-bottom: 1px solid #eee;
+    font-family: monospace;
+}
+
+.Logs_Container li:last-child {
+    border-bottom: none;
+}
+
+.Help_Container {
+    max-width: 700px;
+    margin: auto;
     background-color: #fff;
-    margin: 5px 0;
-    padding: 10px;
+    padding: 20px;
     border-radius: 5px;
+}
+
+.Help_Container h1 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.Help_Container pre {
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 10px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+@media (max-width: 600px) {
+    .Meta_Configuration, .Logs_Container, .Help_Container {
+        padding: 15px;
+    }
+
+    header nav a {
+        display: block;
+        margin: 5px 0;
+    }
 }
