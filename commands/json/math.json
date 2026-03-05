@@ -1,0 +1,13 @@
+{
+  "meta": { "name": "math", "version": "1" },
+  "commands": [
+    {
+      "trigger": "math",
+      "admin_only": true,
+      "args": [{ "name": "text", "rest": true }],
+      "actions": [
+        {"type": "math", "expression": "2 + 2 * 0"}
+      ]
+    }
+  ]
+}

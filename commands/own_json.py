@@ -25,6 +25,7 @@ from config import Meta
 #
 # TODO:
 # - FIX IT!
+# - - Math fixed!
 
 
 JSON_DIR = Path(__file__).parent / "json"
@@ -37,35 +38,59 @@ SAFE_OPERATORS = {
     ast.Div: operator.truediv,
     ast.Mod: operator.mod,
     ast.Pow: operator.pow,
+
+    ast.UAdd: operator.pos,
+    ast.USub: operator.neg,
+
     ast.Lt: operator.lt,
     ast.Gt: operator.gt,
     ast.LtE: operator.le,
     ast.GtE: operator.ge,
     ast.Eq: operator.eq,
     ast.NotEq: operator.ne,
+
     ast.BitAnd: operator.and_,
     ast.BitOr: operator.or_,
 }
-
 def safe_eval(expr: str, default=0):
     try:
         def _eval(node):
-            if isinstance(node, (ast.Num, ast.Constant)):
-                return node.n if hasattr(node, "n") else node.value
+
+            if isinstance(node, ast.Constant):
+                if isinstance(node.value, (int, float, bool)):
+                    return node.value
+                raise ValueError("Invalid constant")
+
+            elif isinstance(node, ast.UnaryOp):
+                op = SAFE_OPERATORS.get(type(node.op))
+                if not op:
+                    raise ValueError("Operator not allowed")
+                return op(_eval(node.operand))
+
             elif isinstance(node, ast.BinOp):
-                return SAFE_OPERATORS[type(node.op)](_eval(node.left), _eval(node.right))
+                op = SAFE_OPERATORS.get(type(node.op))
+                if not op:
+                    raise ValueError("Operator not allowed")
+                return op(_eval(node.left), _eval(node.right))
+
             elif isinstance(node, ast.Compare):
                 left = _eval(node.left)
-                result = True
                 for op, comp in zip(node.ops, node.comparators):
+                    func = SAFE_OPERATORS.get(type(op))
+                    if not func:
+                        raise ValueError("Comparison not allowed")
                     right = _eval(comp)
-                    result = SAFE_OPERATORS[type(op)](left, right)
+                    if not func(left, right):
+                        return False
                     left = right
-                return result
+                return True
+
             else:
-                raise ValueError(f"Unsafe expr: {expr}")
+                raise ValueError(f"Unsafe node: {type(node)}")
+
         tree = ast.parse(expr, mode="eval")
         return _eval(tree.body)
+
     except Exception:
         return default
 
