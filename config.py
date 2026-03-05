@@ -11,7 +11,7 @@ load_dotenv()
 
 class Meta:
     # DO NOT CHANGE
-    version = "v0.0.0.-e9.u135" # DO NOT CHANGE (unless you change it and want to update the version)
+    version = "v0.0.0.-e10.u4" # DO NOT CHANGE (unless you change it and want to update the version)
     GUILD_ID = os.getenv("GUILD_ID") # DO NOT CHANGE
     TOKEN = os.getenv("BOT_TOKEN") # DO NOT CHANGE
     ai_messages = [] # DO NOT CHANGE
