@@ -6,7 +6,7 @@ from utils.logger import safe_send, log
 from config import Meta
 from utils.checks import is_admin
 from db_log.main import db_show_messages
-
+from utils.embed import send_embed, json_to_tuple
 
 async def handle_admin(message, command_text: str) -> bool:
     guild = message.guild
@@ -43,11 +43,16 @@ async def handle_admin(message, command_text: str) -> bool:
                 Meta.db_log_is_active = False
                 await safe_send(message.channel, "DB log is now deactivated")
                 await log(f"{member} used dblog off", guild)
-            elif action == "show":
-                await safe_send(message.channel, db_show_messages())
-                await log(f"{member} used dblog show", guild)
+            elif action == "show": # Showing the log via an embed
+                data = db_show_messages()
+                await send_embed(
+                    message.channel,
+                    "BOT-DB-LOG-SHOW",
+                    f"open_bot version {Meta.version} log",
+                    json_to_tuple(data)
+                )
             else:
-                await safe_send(message.channel, f"WebApp cannot do: {action}")
+                await safe_send(message.channel, f"dblog cannot do: {action}")
                 await log(f"{member} tried dblog {action}", guild)
             return True
 
