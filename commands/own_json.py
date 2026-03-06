@@ -14,19 +14,7 @@ from utils.checks import is_admin
 from utils.ai import Ollama
 from config import Meta
 
-# THIS SYSTEM IS NOT ONLY JUST DEBUGGING, IT IS JUST FOR TESTING
-# IF YOUN USE THIS IN ANY WAY, BE SURE THEY WILL BE ERRORS
-# IT IS CRAP, I KNOW
-# I WILL FIX IT, SOMEDAY
-#
-# SOME PARTS OF THIS CODE ARE CREATET BY AI, TO HELP ME OUT
-# I DID MOST OF IT BYMYSELF THO
-# CALL ME SHIT BUT I DO WHAT I WANT
-#
-# TODO:
-# - FIX IT!
-# - - Math fixed!
-
+# THIS IS A EXPERIMENTAL FEATURE
 
 JSON_DIR = Path(__file__).parent / "json"
 COMMANDS = []
