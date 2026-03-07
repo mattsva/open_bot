@@ -51,3 +51,27 @@ https://github.com/mattsva/open_bot
 Copyright (c) 2026 mattisva
 Licensed under the MIT License
 """
+
+WEB_HELP_TEXT = f"""
+**open_bot {Meta.version} WebApp**
+
+━━━━━━━━━━━━━━━━━━━━
+**Status**
+━━━━━━━━━━━━━━━━━━━━
+
+WebApp is currently {"online" if Meta.web_active else "offline"}
+WebApp debuging is currently {"online" if Meta.web_debug else "offline"}
+WebApp only local host is currently {"online" if Meta.only_localhost else "offline"}
+
+━━━━━━━━━━━━━━━━━━━━
+**Help**
+━━━━━━━━━━━━━━━━━━━━
+
+The WebApp system is usable to change variables, view logs and more.
+Admin only.
+
+━━━━━━━━━━━━━━━━━━━━
+https://github.com/mattsva/open_bot
+Copyright (c) 2026 mattisva
+Licensed under the MIT License
+"""

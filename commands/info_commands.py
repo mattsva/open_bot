@@ -3,7 +3,7 @@
 # Licensed under the MIT License - see the LICENSE file in the project root for details.
 import discord
 from utils.logger import safe_send, log
-from commands.help_command import HELP_TEXT
+from commands.help_command import HELP_TEXT, WEB_HELP_TEXT
 from config import Meta
 
 
@@ -103,6 +103,17 @@ async def handle_info(message, command_text: str) -> bool:
 
             await safe_send(message.channel, response)
             await log(f"{member} used roleinfo", guild)
+            return True
+
+        # webhelp
+        if cmd == "webhelp":
+            if Meta.output:
+                await safe_send(message.channel, WEB_HELP_TEXT)
+
+            if Meta.print_console:
+                print(f"[HELP] {member} requested webhelp")
+
+            await log(f"{member} requested webhelp", guild)
             return True
 
         return False
