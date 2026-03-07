@@ -4,6 +4,7 @@
 import asyncio
 import random
 from utils.logger import safe_send, log
+from utils.checks import is_admin, is_ai_blacklistet
 from config import Meta
 from utils.ai import Ollama
 
@@ -60,6 +61,12 @@ async def handle_fun(message, command_text: str) -> bool:
 
         # AI Chat
         elif cmd.startswith("ai"):
+            if Meta.ai_needs_admin and not is_admin(member):
+                await safe_send(message.channel, "You need to be admin for this.")
+                return True
+            if is_ai_blacklistet(member):
+                await safe_send(message.channel, "You are not allowed to use the AI.")
+                return True
             if not Meta.ai_is_active:
                 await safe_send(message.channel, "AI fetures are turned off.")
                 return True
@@ -77,7 +84,6 @@ async def handle_fun(message, command_text: str) -> bool:
             return True
 
             # TODO:
-            # - Add verification
             # - Add ratelimit
 
         return False  # no command matched

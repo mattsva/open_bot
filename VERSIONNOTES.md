@@ -7,6 +7,7 @@
 | v0.0.0.-e10.u4  | Added better ooking webapp with logs and help view                                                                                  |
 | v0.0.0.-e10.u9  | Added embed; Added embed to 'dblog show'                                                                                            |
 | v0.0.0.-e10.u13 | WebApp help                                                                                                                         |
+| v0.0.0.-e10.u15 | more AI limits                                                                                                                      |
 
 > This are the version notes since version `v0.0.0.-e9.u134`.
 

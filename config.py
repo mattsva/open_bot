@@ -11,7 +11,7 @@ load_dotenv()
 
 class Meta:
     # DO NOT CHANGE
-    version = "v0.0.0.-e10.u13" # DO NOT CHANGE (unless you change it and want to update the version)
+    version = "v0.0.0.-e10.u15" # DO NOT CHANGE (unless you change it and want to update the version)
     GUILD_ID = os.getenv("GUILD_ID") # DO NOT CHANGE
     TOKEN = os.getenv("BOT_TOKEN") # DO NOT CHANGE
     ai_messages = [] # DO NOT CHANGE
@@ -30,6 +30,8 @@ class Meta:
     # AI
     ai_is_active  = True
     ai_model = "gpt-oss:latest"
+    ai_needs_admin = False
+    ai_blacklistet = None # role that is blacklistet to use AI
 
     # WebApp
     web_active = True # Activate web server
@@ -37,4 +39,4 @@ class Meta:
     only_localhost = True # True = 127.0.0.1 only, False = accessible in WLAN
 
 # TODO:
-# - Add more customisable options
+# - Add more customisable options # edit: it gets more! ;)

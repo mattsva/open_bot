@@ -122,6 +122,3 @@ async def handle_info(message, command_text: str) -> bool:
         print(f"Error in info_commands: {e}")
         await safe_send(message.channel, "An error occurred while processing your request.")
         return True
-
-# TODO:
-# - Add info about the WebApp-System
