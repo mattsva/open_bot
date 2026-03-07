@@ -11,6 +11,8 @@
 
 > This are the version notes since version `v0.0.0.-e9.u134`.
 
+# I added GPG signation :)
+
 This project is licensed under the MIT License. See the `LICENSE` file for full details.
 ---
 Copyright (c) 2026 mattsva
