@@ -68,17 +68,27 @@ async def handle_admin(message, command_text: str) -> bool:
                 await safe_send(message.channel, "AI fetures are deactivated")
                 await log(f"{member} used aai off", guild)
             elif action == "show":
-                await safe_send(message.channel, Meta.ai_model)
+                await safe_send(message.channel, f"`{Meta.ai_system}`: `{Meta.ai_model}` {f"with `{Meta.ai_gpt4all_maxtokens}` tokens" if Meta.ai_system == "gpt4all" else ""}")
                 await log(f"{member} used aai show", guild)
-            elif action.startswith("ms"):
+            elif action.startswith("ms"): # model switch
                 Meta.ai_model = action[3:].strip()
                 await safe_send(message.channel, f"Switched AI model to `{Meta.ai_model}`.")
-                await log(f"{member} used aai modelswitch (ms) ms", guild)
+                await log(f"{member} used aai modelswitch (ms)", guild)
+            elif action.startswith("ss"): # system switch
+                Meta.ai_system = action[3:].strip()
+                await safe_send(message.channel, f"Switched AI system to `{Meta.ai_system}`.")
+                await log(f"{member} used aai systemswitch (ss)", guild)
+            elif action.startswith("smt"): # system switch
+                try:
+                    Meta.ai_gpt4all_maxtokens = int(action[4:].strip())
+                    await safe_send(message.channel, f"Switched AI max tokens to `{Meta.ai_gpt4all_maxtokens}`.")
+                    await log(f"{member} used aai set max tokens", guild)
+                except:
+                    await safe_send(message.channel, f"The max tokens needs to be an integer.")
             else:
                 await safe_send(message.channel, f"AI system cannot do: {action}")
                 await log(f"{member} tried aai {action}", guild)
             return True
-
 
         # cc - create channel
         elif cmd.startswith("cc"):

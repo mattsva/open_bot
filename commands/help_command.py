@@ -23,8 +23,10 @@ HELP_TEXT = f"""
 `!bot rr @user <role>` → Remove role <role> form user
 `!bot aai on` → AI fetures on
 `!bot aai off` → AI fetures on
-`!bot aai show` → show AI model
-`!bot mc <model>` → AI model change to <model>
+`!bot aai show` → show AI model, system and max tokens
+`!bot aai ms <model>` → AI model change to <model>
+`!bot aai ss <system>` → AI system change to <system>
+`!bot aai smt <tokens>` → Set max tokens to <tokens>
 `!bot dblog on` → DB logging system on
 `!bot dblog off` → DB logging system off
 `!bot dblog show` → Show DB log
@@ -45,6 +47,12 @@ HELP_TEXT = f"""
 `rchoose <a>-<b>-<c>-...` → Randomly choose a, b, c or ...
 `!bot ping` → Replies pong
 `!bot ai <message>` → Chat with AI
+
+━━━━━━━━━━━━━━━━━━━━
+**Other**
+━━━━━━━━━━━━━━━━━━━━
+GTP4ALL AI example model: `orca-mini-3b-gguf2-q4_0.gguf`
+Ollama AI example model: `gpt-oss:latest`
 
 ━━━━━━━━━━━━━━━━━━━━
 https://github.com/mattsva/open_bot

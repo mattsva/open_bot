@@ -9,6 +9,7 @@
 | v0.0.0.-e10.u13 | WebApp help                                                                                                                         |
 | v0.0.0.-e10.u15 | more AI limits                                                                                                                      |
 | v0.0.0.-e10.u17 | added gpt4all                                                                                                                       |
+| v0.0.0.-e10.u25 | added admin commands to configure gpt4all and set the '!bot ai' command to chat                                                     |
 
 > This are the version notes since version `v0.0.0.-e9.u134`.
 
