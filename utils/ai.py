@@ -4,7 +4,7 @@
 import ollama
 import subprocess
 from config import Meta
-
+from gpt4all import GPT4All
 
 class Ollama:
     _process = None
@@ -51,7 +51,30 @@ class Ollama:
 
         return assistant_content
 
+class Gpt4all:
+    @staticmethod
+    def ai(content: str) -> str:
+        if not isinstance(content, str):
+            raise TypeError("Gpt4all.ai expects a string input.")
+
+        if not isinstance(Meta.ai_messages, list): # ensure message history is a list
+            raise TypeError("Meta.ai_messages must be a list.")
+
+        Meta.ai_messages.append({ # append user message
+            "role": "user",
+            "content": content
+        })
+
+        model = GPT4All(Meta.ai_model) # GPT4ALL model and genarate stuff
+        output = model.generate(Meta.ai_messages, max_tokens=Meta.ai_gpt4all_maxtokens)
+
+        Meta.ai_messages.append({
+            "role": "assistant",
+            "content": output
+        })
+
+        return assistant_content
+
 # TODO:
-# - Add model change
 # - Add more AI systems
 # - - Add GPT4ALL integration
