@@ -1,6 +1,6 @@
-discord==2.3.2
-dotenv==0.9.9
-Flask==3.1.3
-ollama==0.6.1
-pip==26.0.1
-gpt4all
+discord>=2.3.2
+dotenv>=0.9.9
+Flask>=3.1.3
+ollama>=0.6.1
+pip>=26.0.1
+gpt4all>=2.8.2

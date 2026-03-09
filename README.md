@@ -3,7 +3,7 @@
 **open_bot** is an open-source Discord bot written in Python, built primarily using the `discord.py` library.  
 It is licensed under the MIT License (see `LICENSE`).
 It is currently running on `Python 3.14.3`.
-Its using `ollama` for AI.
+Its using `ollama` and `gpt4all` for AI.
 Its using `sqlite` for database (in python integratet).
 Version `v0.0.0.-e10.u19` (development build). The `v0.0.0` prefix reflects the base version; the `.-e2.u4` suffix is for internal development/testing.
 
@@ -17,7 +17,7 @@ Version `v0.0.0.-e10.u19` (development build). The `v0.0.0` prefix reflects the 
 - Event handling via `on_ready`
 - Easy to extend with new commands or events
 
-- AI integration with `ollama`
+- AI integration with `ollama` and `gtp4all`
 
 ---
 
@@ -28,7 +28,8 @@ Version `v0.0.0.-e10.u19` (development build). The `v0.0.0` prefix reflects the 
 |        `discord.py`       | >=2.3.0 |                   MIT                   |          Core Discord bot framework          |
 |      `python-dotenv`      | >=1.0.0 |                   MIT                   | Load environment variables from `.env` files |
 |         `ollama`          | >=0.6.1 |                   MIT                   |             Provides AI functions            |
-|          `flask`          | >=3.1.3 |              BSD-3-Clause               |     Lightweight web framework for WebApp     |
+|         `flask`           | >=3.1.3 |              BSD-3-Clause               |     Lightweight web framework for WebApp     |
+|        `gpt4all`          | >=2.8.2 |                   MIT                   |             Provides AI functions            |
 
 > These dependencies are **not included in the repository**. They must be installed separately.
 
