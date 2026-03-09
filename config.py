@@ -11,7 +11,7 @@ load_dotenv()
 
 class Meta:
     # DO NOT CHANGE
-    version = "v0.0.0.-e10.u17" # DO NOT CHANGE (unless you change it and want to update the version)
+    version = "v0.0.0.-e10.u19" # DO NOT CHANGE (unless you change it and want to update the version)
     GUILD_ID = os.getenv("GUILD_ID") # DO NOT CHANGE
     TOKEN = os.getenv("BOT_TOKEN") # DO NOT CHANGE
     ai_messages = [] # DO NOT CHANGE
@@ -28,11 +28,11 @@ class Meta:
     admin_role = "admin"
 
     # AI
-    ai_system = "ollama"
+    ai_system = "ollama" # ollama or gpt4all
     ai_is_active  = True
     if ai_system == "ollama":
         ai_model = "gpt-oss:latest"
-    elif ai_system == "gtp4all":
+    elif ai_system == "gpt4all":
         ai_model = "orca-mini-3b-gguf2-q4_0.gguf"
     ai_needs_admin = False
     ai_blacklistet = None # role that is blacklistet to use AI

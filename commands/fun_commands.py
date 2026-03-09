@@ -6,7 +6,7 @@ import random
 from utils.logger import safe_send, log
 from utils.checks import is_admin, is_ai_blacklistet
 from config import Meta
-from utils.ai import Ollama
+from utils.ai import Ollama, Gpt4all
 
 
 async def handle_fun(message, command_text: str) -> bool:
@@ -77,7 +77,7 @@ async def handle_fun(message, command_text: str) -> bool:
                 return True
 
             # Run blocking AI call in thread
-            response = await asyncio.to_thread(Ollama.ai, content)
+            response = await asyncio.to_thread(Ollama.ai if Meta.ai_system == "ollama" else (Gpt4all.ai if Meta.ai_system == "gpt4all" else print), content)
 
             await safe_send(message.channel, response)
             await log(f"{member} used ai command", guild)

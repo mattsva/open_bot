@@ -52,29 +52,28 @@ class Ollama:
         return assistant_content
 
 class Gpt4all:
+    _process = None
+
     @staticmethod
     def ai(content: str) -> str:
         if not isinstance(content, str):
             raise TypeError("Gpt4all.ai expects a string input.")
-
-        if not isinstance(Meta.ai_messages, list): # ensure message history is a list
+        if not isinstance(Meta.ai_messages, list):
             raise TypeError("Meta.ai_messages must be a list.")
 
-        Meta.ai_messages.append({ # append user message
-            "role": "user",
-            "content": content
-        })
+        Meta.ai_messages.append({"role": "user", "content": content})
 
-        model = GPT4All(Meta.ai_model) # GPT4ALL model and genarate stuff
-        output = model.generate(Meta.ai_messages, max_tokens=Meta.ai_gpt4all_maxtokens)
+        if Gpt4all._process is None:
+            Gpt4all._process = GPT4All(Meta.ai_model)
 
-        Meta.ai_messages.append({
-            "role": "assistant",
-            "content": output
-        })
+        # convert message history to single prompt
+        prompt = ""
+        for msg in Meta.ai_messages:
+            role = msg["role"].capitalize()
+            prompt += f"{role}: {msg['content']}\n"
+        prompt += "Assistant: "
 
-        return assistant_content
+        output = Gpt4all._process.generate(prompt, max_tokens=Meta.ai_gpt4all_maxtokens)
 
-# TODO:
-# - Add more AI systems
-# - - Add GPT4ALL integration
+        Meta.ai_messages.append({"role": "assistant", "content": output})
+        return output
