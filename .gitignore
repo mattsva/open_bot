@@ -19,3 +19,4 @@ venv/
 # DB
 .db
 db_log/open_bot.db
+.vscode/

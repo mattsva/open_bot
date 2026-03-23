@@ -1,5 +1,5 @@
 # commands/admin_commands.py
-# Copyright (c) 2026 mattisva
+# Copyright (c) 2026 mattsva
 # Licensed under the MIT License - see the LICENSE file in the project root for details.
 import discord
 from utils.logger import safe_send, log
@@ -61,11 +61,11 @@ async def handle_admin(message, command_text: str) -> bool:
             action = cmd_raw[3:].strip()
             if action == "on":
                 Meta.ai_is_active = True
-                await safe_send(message.channel, "AI fetures are now activated")
+                await safe_send(message.channel, "AI features are now activated")
                 await log(f"{member} used aai on", guild)
             elif action == "off":
                 Meta.ai_is_active = False
-                await safe_send(message.channel, "AI fetures are deactivated")
+                await safe_send(message.channel, "AI features are deactivated")
                 await log(f"{member} used aai off", guild)
             elif action == "show":
                 await safe_send(message.channel, f"`{Meta.ai_system}`: `{Meta.ai_model}` {f"with `{Meta.ai_gpt4all_maxtokens}` tokens" if Meta.ai_system == "gpt4all" else ""}")
@@ -83,8 +83,8 @@ async def handle_admin(message, command_text: str) -> bool:
                     Meta.ai_gpt4all_maxtokens = int(action[4:].strip())
                     await safe_send(message.channel, f"Switched AI max tokens to `{Meta.ai_gpt4all_maxtokens}`.")
                     await log(f"{member} used aai set max tokens", guild)
-                except:
-                    await safe_send(message.channel, f"The max tokens needs to be an integer.")
+                except Exception as e:
+                    await safe_send(message.channel, f"Its an Error, probably the max tokens needs to be an integer. Error: {e}")
             else:
                 await safe_send(message.channel, f"AI system cannot do: {action}")
                 await log(f"{member} tried aai {action}", guild)
@@ -270,5 +270,5 @@ async def handle_admin(message, command_text: str) -> bool:
 
 
 # TODO:
-# - Add premission system
-# - - Add premisson commands
+# - Add Permission system
+# - - Add Permission commands
