@@ -1,5 +1,5 @@
 # commands/help_command.py
-# Copyright (c) 2026 mattisva
+# Copyright (c) 2026 mattsva
 # Licensed under the MIT License - see the LICENSE file in the project root for details.
 from config import Meta
 
@@ -56,7 +56,7 @@ Ollama AI example model: `gpt-oss:latest`
 
 ━━━━━━━━━━━━━━━━━━━━
 https://github.com/mattsva/open_bot
-Copyright (c) 2026 mattisva
+Copyright (c) 2026 mattsva
 Licensed under the MIT License
 """
 
@@ -80,6 +80,6 @@ Admin only.
 
 ━━━━━━━━━━━━━━━━━━━━
 https://github.com/mattsva/open_bot
-Copyright (c) 2026 mattisva
+Copyright (c) 2026 mattsva
 Licensed under the MIT License
 """

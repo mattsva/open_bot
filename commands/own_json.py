@@ -1,5 +1,5 @@
 # commands/own_json.py
-# Copyright (c) 2026 mattisva
+# Copyright (c) 2026 mattsva
 # Licensed under the MIT License
 import json
 import random

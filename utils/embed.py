@@ -1,5 +1,5 @@
 # utils/embed.py
-# Copyright (c) 2026 mattisva
+# Copyright (c) 2026 mattsva
 # Licensed under the MIT License - see the LICENSE file in the project root for details.
 import discord
 import json
